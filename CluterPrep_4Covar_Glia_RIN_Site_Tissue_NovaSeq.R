@@ -55,7 +55,7 @@ colnames(GSE15_RawCounts) = substr(colnames(GSE15_RawCounts),1,14)
 ########################################################################################################################################
 
 
-TECounts = read.csv("NovaSeq_SpinalCord_ALSCohort_TECounts_HGND_6-3-23_nodups.csv")
+TECounts = read.csv("NovaSeq_SpinalCord_ALSCohort_TECounts_HGND_6-3-23_nodups.csv") #Provided in Supplemental Dataset 1
 rownames(TECounts) = TECounts[,1]
 TECounts = TECounts[,-1]
 
@@ -501,7 +501,7 @@ write.csv(MAD5k_SAKE,file)
 
 
 #save.image("NovaSeq_MAD10k_Ready4Clustering_ALS_4Covariates_9-15-23.RData")
-#load("G:/SpinalCord/Publication/RawExpression/NovaSeq_NoGlia_JH/NovaSeq_MAD10k_Ready4Clustering_ALS_NoGliaMarkers1k_8-17-23.RData")
+load("G:/SpinalCord/Publication/RawExpression/4Covar_NovaSeq/NovaSeq_MAD10k_Ready4Clustering_ALS_4Covariates_9-15-23.RData")
 
 
 # library(DESeq2)
@@ -510,3 +510,9 @@ write.csv(MAD5k_SAKE,file)
 # DESeq_NormalizedCounts_60k = DESeq_NormalizedCounts_60k[! (rownames(DESeq_NormalizedCounts_60k) %in% rownames(sig)),]
 # NormCounts = DESeq_NormalizedCounts_60k
 # write.csv(NormCounts,"NovaSeq_SpinalCord_withControls_MedianofRatios_ENSG.csv")
+
+library("vsn")
+meanSdPlot(vstcounts)
+dds = DESeqDataSetFromMatrix(countData = rALSCountData_RIN, colData = FullPheno, design= ~ RIN, tidy=F)
+dseq = DESeq(dds,betaPrior=T)
+plotDispEsts(dseq)

@@ -30,7 +30,7 @@ RecoverDESeqSigGenes = function(DESeqres,nfeatures){
 wd = 'G:/SpinalCord/Publication/Enrichment/FullCohort/4Covar'
 setwd(wd)
 
-PrognosticBM = read.csv("DE_FeatureSet_CombinedPlatform_10-11-23.csv",header = F) #Supplemental Table
+PrognosticBM = read.csv("DE_FeatureSet_CombinedPlatform_10-11-23.csv",header = F) #Files found at: https://figshare.com/authors/Jarrett_Eshima/13813720
 
 ##Get feature names from classifier matrix
 Transcripts = as.character(unlist(PrognosticBM))
@@ -52,7 +52,7 @@ CorFeat_Glia = c(my36[1:12],S8)
 CorFeat_Ox = c(my36[13:24],S9)
 CorFeat_TD = c(my36[25:36],S10)
 
-gmarkers = read.csv("G:/SpinalCord/Publication/DifferentialExpression/4Covar/Overlapping_Independent_10-2-23.csv")[,2]
+gmarkers = read.csv("G:/SpinalCord/Publication/DifferentialExpression/4Covar/Overlapping_Independent_10-2-23.csv")[,2] #Files found at: https://figshare.com/authors/Jarrett_Eshima/13813720
 
 #allextra = c(CorFeat_Glia,CorFeat_Ox,CorFeat_TD)
 allextra = names(table(c(CorFeat_Glia,CorFeat_Ox,CorFeat_TD,S12,gmarkers)))
@@ -84,11 +84,11 @@ colnames(GSE15_RawCounts) = substr(colnames(GSE15_RawCounts),1,14)
 
 ### HiSeq
 
-TECounts = read.csv("HiSeq_SpinalCord_ALSCohort_TECounts_HGND_6-3-23.csv")
+TECounts = read.csv("HiSeq_SpinalCord_ALSCohort_TECounts_HGND_6-3-23.csv") #Supplemental Dataset 1
 rownames(TECounts) = TECounts[,1]
 TECounts = TECounts[,-1]
 
-ctrTECounts = read.csv("HiSeq_SpinalCord_ControlCohort_TECounts_HGND_8-15-23.csv")
+ctrTECounts = read.csv("HiSeq_SpinalCord_ControlCohort_TECounts_HGND_8-15-23.csv") #Supplemental Dataset 1
 rownames(ctrTECounts) = ctrTECounts[,1]
 ctrTECounts = ctrTECounts[,-1]
 
@@ -179,11 +179,11 @@ setwd("G:/SpinalCord/Publication/RawExpression")
 
 ### NovaSeq
 
-TECounts = read.csv("NovaSeq_SpinalCord_ALSCohort_TECounts_HGND_6-3-23_nodups.csv")
+TECounts = read.csv("NovaSeq_SpinalCord_ALSCohort_TECounts_HGND_6-3-23_nodups.csv") #Supplemental Dataset 1
 rownames(TECounts) = TECounts[,1]
 TECounts = TECounts[,-1]
 
-ctrTECounts = read.csv("NovaSeq_SpinalCord_ControlCohort_TECounts_HGND_8-15-23.csv")
+ctrTECounts = read.csv("NovaSeq_SpinalCord_ControlCohort_TECounts_HGND_8-15-23.csv") #Supplemental Dataset 1
 rownames(ctrTECounts) = ctrTECounts[,1]
 ctrTECounts = ctrTECounts[,-1]
 
@@ -232,8 +232,7 @@ setwd("G:/SpinalCord/Publication")
 #Coldata matrix for DESeq2
 clinicaldata = read.csv("CLINICAL_DATA_PRUDENCIO.csv") 
 
-##IMPORTANT: THERE ARE SAMPLES NOT INCLUDED IN THE GENE EXPRESSION MATRIX THAT WERE CONSIDERED BY PRUDENCIO AND HUMPHREYS
-# THESE SAMPLES WILL NEED TO GO THROUGH STAR RSEM PIPELINE TOO
+
 list = gsub("-",".",clinicaldata$ExternalSampleId)
 table(list %in% colnames(TECounts))
 
@@ -384,7 +383,7 @@ ensembl = biomaRt::useMart(biomart = "ENSEMBL_MART_ENSEMBL", dataset = "hsapiens
 gene_positions <- biomaRt::getBM(filters = 'hgnc_symbol',attributes=c('ensembl_gene_id','hgnc_symbol'), values = newEG, mart = ensembl)
 
 setwd("G:/SpinalCord/Publication/DifferentialExpression")
-Dec16archive = read.csv("Dec16Archive_SD2.csv") #maintain ENSG --> SYMBOL from previous paper
+Dec16archive = read.csv("Dec16Archive_SD2.csv") #maintain ENSG --> SYMBOL from previous paper, available at: https://www.nature.com/articles/s41467-022-35494-w#Sec33
 
 gene_positionsclean = gene_positions[! gene_positions$ensembl_gene_id %in% Dec16archive$ensembl_gene_id,]
 
@@ -439,10 +438,10 @@ colnames(FullPheno_sr)[11] = "Tissue"
 Clinical$ExternalSampleId = gsub('-','.',Clinical$ExternalSampleId)
 
 setwd("G:/SpinalCord/Publication/Clustering/NovaSeq/4Covar_5k/RobustSubtypeAssignment")
-NovaSeqlabs = read.csv("SpinalCord_NovaSeq_RobustSubtypeAssignment_4Covariate_9-18-23_majority.csv")
+NovaSeqlabs = read.csv("SpinalCord_NovaSeq_RobustSubtypeAssignment_4Covariate_9-18-23_majority.csv") #Generated in a previous script
 rownames(NovaSeqlabs) = NovaSeqlabs[,1]; NovaSeqlabs = NovaSeqlabs[,-1]
 setwd("G:/SpinalCord/Publication/Clustering/HiSeq/4Covar_5k/RobustSubtypeAssignment")
-HiSeqlabs = read.csv("SpinalCord_HiSeq_RobustSubtypeAssignment_4Covariate_9-18-23_majority.csv")
+HiSeqlabs = read.csv("SpinalCord_HiSeq_RobustSubtypeAssignment_4Covariate_9-18-23_majority.csv") #Generated in a previous script
 rownames(HiSeqlabs) = HiSeqlabs[,1]; HiSeqlabs = HiSeqlabs[,-1]
 
 FullPheno_sr$Subtype = NA
@@ -533,12 +532,12 @@ filt.GT.sig2 = GT.res[rownames(GT.res) %in% TranscriptsPlus,]
 filt.GO.sig2 = GO.res[rownames(GO.res) %in% TranscriptsPlus,]
 filt.TO.sig2 = TO.res[rownames(TO.res) %in% TranscriptsPlus,]
 
-write.csv(filt.glia.sig2,"BothPlatform_AllSubjects_Top5000_wCortexFeatures_SubtypeSigGenes_10-18-23_GliaControl.csv")
-write.csv(filt.ox.sig2,"BothPlatform_AllSubjects_Top5000_wCortexFeatures_SubtypeSigGenes_10-18-23_OxControl.csv")
-write.csv(filt.TE.sig2,"BothPlatform_AllSubjects_Top5000_wCortexFeatures_SubtypeSigGenes_10-18-23_TDControl.csv")
-write.csv(filt.GT.sig2,"BothPlatform_AllSubjects_Top5000_wCortexFeatures_SubtypeSigGenes_10-18-23_GliaTD.csv")
-write.csv(filt.GO.sig2,"BothPlatform_AllSubjects_Top5000_wCortexFeatures_SubtypeSigGenes_10-18-23_GliaOx.csv")
-write.csv(filt.TO.sig2,"BothPlatform_AllSubjects_Top5000_wCortexFeatures_SubtypeSigGenes_10-18-23_TDOx.csv")
+# write.csv(filt.glia.sig2,"BothPlatform_AllSubjects_Top5000_wCortexFeatures_SubtypeSigGenes_10-18-23_GliaControl.csv")
+# write.csv(filt.ox.sig2,"BothPlatform_AllSubjects_Top5000_wCortexFeatures_SubtypeSigGenes_10-18-23_OxControl.csv")
+# write.csv(filt.TE.sig2,"BothPlatform_AllSubjects_Top5000_wCortexFeatures_SubtypeSigGenes_10-18-23_TDControl.csv")
+# write.csv(filt.GT.sig2,"BothPlatform_AllSubjects_Top5000_wCortexFeatures_SubtypeSigGenes_10-18-23_GliaTD.csv")
+# write.csv(filt.GO.sig2,"BothPlatform_AllSubjects_Top5000_wCortexFeatures_SubtypeSigGenes_10-18-23_GliaOx.csv")
+# write.csv(filt.TO.sig2,"BothPlatform_AllSubjects_Top5000_wCortexFeatures_SubtypeSigGenes_10-18-23_TDOx.csv")
 
 ################################  DESeq2 Normalization  #########################################################################
 
@@ -558,41 +557,9 @@ load("G:/SpinalCord/Publication/DifferentialExpression/4Covar/SpinalCord_Differe
 
 
 ############################### HEATMAPs ################################################################
+#MatrixtoHeatmap3() found in UsefulFunctions_v3.R
 
-# #With the original cortex features
-# HeatExpr = NormCounts[rownames(NormCounts) %in% my36,]
-# zHeatExpr = zscore(HeatExpr,featuresarerows = T,removeNA = T,addlabels = T)
-# MatrixtoHeatmap3(zHeatExpr,samplesarecols = T,featuresasrows = T,limits=c(-4,4),customfeats = rev(my36),customsamps = samps,sepindex = c(length(GliaIDs),length(GliaIDs)+length(OxIDs),length(GliaIDs)+length(OxIDs)+length(TDIDs)))
-# 
-# #Glia Supplemental
-# HeatExpr = NormCounts[rownames(NormCounts) %in% S8,]
-# zHeatExpr = zscore(HeatExpr,featuresarerows = T,removeNA = T,addlabels = T)
-# MatrixtoHeatmap3(zHeatExpr,samplesarecols = T,featuresasrows = T,limits=c(-4,4),customfeats = rev(S8),customsamps = samps,sepindex = c(length(GliaIDs),length(GliaIDs)+length(OxIDs),length(GliaIDs)+length(OxIDs)+length(TDIDs)))
-# 
-# #Ox Supplemental
-# HeatExpr = NormCounts[rownames(NormCounts) %in% S9,]
-# zHeatExpr = zscore(HeatExpr,featuresarerows = T,removeNA = T,addlabels = T)
-# MatrixtoHeatmap3(zHeatExpr,samplesarecols = T,featuresasrows = T,limits=c(-4,4),customfeats = rev(S9),customsamps = samps,sepindex = c(length(GliaIDs),length(GliaIDs)+length(OxIDs),length(GliaIDs)+length(OxIDs)+length(TDIDs)))
-# 
-# #TD Supplemental
-# HeatExpr = NormCounts[rownames(NormCounts) %in% S10,]
-# zHeatExpr = zscore(HeatExpr,featuresarerows = T,removeNA = T,addlabels = T)
-# MatrixtoHeatmap3(zHeatExpr,samplesarecols = T,featuresasrows = T,limits=c(-4,4),customfeats = rev(S10),customsamps = samps,sepindex = c(length(GliaIDs),length(GliaIDs)+length(OxIDs),length(GliaIDs)+length(OxIDs)+length(TDIDs)))
-
-
-##########Figure 4A
-
-#Remove tentative features with fewer than 10 average counts - QC
-# GliaFeatures = c("AHNAK","FKBP7","IMPA2","TMEM173","SLC10A6","SLC22A3","CHEK2","KCTD14","DLG2","B4GALNT2","CAPN3","CCL26","CCR4","C7","CCR9","CD59","CD300E","CFH","CLEC6A","IQGAP1","PPIC","CYFIP2","GLT8D2","IL1R1","IL20RB","LAMC1","MAP7","MYL9","RND3","SAMHD1","SELP","ST6GALNAC2","TAGLN","TYR","USP53","VIM")
-# OxFeatures = c("ADAMTS20","ATXN8OS","B4GALT6","CPNE4","DDC","EFNA5","ENSG00000270953","ENSG00000286214","FGF13","GABRA1","GABRG3","GAD2","GALNT14","GLRA3","GRIA1","GRIN2A","GRM1","GRM7","HTR2A","KCNAB1","KCNC2","KCNH6","KCNS2","NMNAT2","NMS","NTS","PCLO","PCSK1","PKLR","RIMS2","SCN3A","SLC17A6","SLC35F4","SYN2","SYT1","TMEM35A","UBQLN2","UNC13C","UNC79","UNC80","UNCX","VSTM5")
-# TDFeatures = c("APOBR","APOC1","CYP4X1","ENSG00000229771","ENSG00000237153","ENSG00000259601","ENSG00000261606","ENSG00000279149","ENSG00000280087","GBX1","GJB6","GTP2IP7","HMGB3P7","LINC01058","LINC01956","LINC02026","NKX6-2","NCF2","PTK6","POM121L7P","PTBP1P","SHH","SIGLEC15","TCF23")
-# feats = c(GliaFeatures,OxFeatures,TDFeatures)
-# HeatExpr = rCountData_rinsite[rownames(rCountData_rinsite) %in% feats,]
-# rownames(HeatExpr)[which(rowMeans(HeatExpr,na.rm = T) < 10)]
-# rownames(HeatExpr)[which(rowMeans(HeatExpr,na.rm = T) > 10)]
-
-
-#Pub - Top 20 
+#Pub, n = 20
 GliaFeatures = c("AHNAK","B4GALNT2","CAPN3","CD59","CD300E","CFH","CHEK2","FKBP7","GLT8D2","IL1R1","IQGAP1","KCTD14","LAMC1","MAP7","PPIC","SAMHD1","SELP","TMEM173","USP53","VIM")
 OxFeatures = c("CPNE4","EFNA5","FGF13","GABRG3","GALNT14","GRIA1","GRIN2A","GRM1","KCNH6","KCNS2","NMNAT2","NTS","PCLO","PKLR","RIMS2","SCN3A","SLC35F4","SYN2","SYT1","UNC13C")
 TDFeatures = c("APOBR","APOC1","ENSG00000259601","ENSG00000185332","ENSG00000250608","ENSG00000275620","ENSG00000280087","ENSG00000285492","FPR3","LINC01091","ENSG00000259953","ENSG00000232310","M1AP","ENSG00000216802","NCF2","NLRP12","OTOAP1","ENSG00000234232","SLC28A1","TCF23")
@@ -2287,131 +2254,131 @@ for(i in 1:length(PlotGene)){
 
 ################ Subtype-specific Upregulated TE Expression #####################################################################
 
-MyTEs = rownames(NormCounts)[which(nchar(rownames(NormCounts)) >20)]
-SubtypeTE.glia = SubtypeTE.ox = SubtypeTE.te = SubtypeTE.ond = SubtypeTE.hc = rep(NA,length(MyTEs))
-count1 = count2 = count3 = count4 = count5 = 1
-for(i in 1:length(MyTEs)){
-  
-  ind = which(rownames(NormCounts) == MyTEs[i])
-  GliaAvg = mean(NormCounts[ind,GliaI])
-  OxAvg = mean(NormCounts[ind,OxI])
-  TEAvg = mean(NormCounts[ind,TEI])
-  ONDAvg = mean(NormCounts[ind,ONDI])
-  HCAvg = mean(NormCounts[ind,HCI])
-  
-  pick = max(c(GliaAvg,OxAvg,TEAvg,ONDAvg,HCAvg))
-  
-  if(GliaAvg == pick){
-    SubtypeTE.glia[count1] = strsplit(MyTEs[i],"\\|")[[1]][4]
-    count1 = count1+1
-  }else if(OxAvg == pick){
-    SubtypeTE.ox[count2] = strsplit(MyTEs[i],"\\|")[[1]][4]
-    count2 = count2+1
-  }else if(TEAvg == pick){
-    SubtypeTE.te[count3] = strsplit(MyTEs[i],"\\|")[[1]][4]
-    count3 = count3+1
-  }else if(ONDAvg == pick){
-    SubtypeTE.ond[count4] = strsplit(MyTEs[i],"\\|")[[1]][4]
-    count4 = count4+1
-  }else{
-    SubtypeTE.hc[count5] = strsplit(MyTEs[i],"\\|")[[1]][4]
-    count5 = count5+1
-  }
-  
-}
-
-SubtypeTE.glia = SubtypeTE.glia[! is.na(SubtypeTE.glia)]
-SubtypeTE.ox = SubtypeTE.ox[! is.na(SubtypeTE.ox)]
-SubtypeTE.te = SubtypeTE.te[! is.na(SubtypeTE.te)]
-SubtypeTE.ond = SubtypeTE.ond[! is.na(SubtypeTE.ond)]
-SubtypeTE.hc = SubtypeTE.hc[! is.na(SubtypeTE.hc)]
-
-Subfamily = names(table(c(names(table(SubtypeTE.glia)),names(table(SubtypeTE.ox)),names(table(SubtypeTE.te)),names(table(SubtypeTE.ond)),names(table(SubtypeTE.hc)))))
-SubfamilyDF = matrix(NA,nrow=length(Subfamily),ncol=5)
-rownames(SubfamilyDF) = Subfamily
-colnames(SubfamilyDF) = c("ALS-TD","ALS-Ox","ALS-Glia","FTLD",'HC')
-
-for(i in 1:nrow(SubfamilyDF)){
-  
-  TEcount = length(which(SubtypeTE.te == rownames(SubfamilyDF)[i]))
-  Oxcount = length(which(SubtypeTE.ox == rownames(SubfamilyDF)[i]))
-  Gliacount = length(which(SubtypeTE.glia == rownames(SubfamilyDF)[i]))
-  ONDcount = length(which(SubtypeTE.ond == rownames(SubfamilyDF)[i]))
-  HCcount = length(which(SubtypeTE.hc == rownames(SubfamilyDF)[i]))
-  
-  SubfamilyDF[i,1] = TEcount
-  SubfamilyDF[i,2] = Oxcount
-  SubfamilyDF[i,3] = Gliacount
-  SubfamilyDF[i,4] = ONDcount
-  SubfamilyDF[i,5] = HCcount
-  
-}
-
-#Quick Plot
-par(mar = c(6.1, 5.1, 4.1, 2.1)) 
-mycols = rainbow(nrow(SubfamilyDF))
-barplot(SubfamilyDF,ylim = c(0,300),ylab = "Number of Discriminatory TEs",xlab="Subtype",col = mycols,cex.axis = 1.2,cex.names = 1.5,cex.lab=1.5)
-#legend(5.5,300,legend = rownames(SubfamilyDF),col = mycols,lty = 1,lwd=3,cex = 0.2)
-
-#Legend without plot
-plot(NULL ,xaxt='n',yaxt='n',bty='n',ylab='',xlab='', xlim=0:1, ylim=0:1)
-legend("topleft",legend = rownames(SubfamilyDF),col = mycols,lty = 1,lwd=3,cex = 0.8,ncol=4)
-
-#Source
-# setwd("D:/Jarrett/Research/Nat Comm Reviews/Source")
-# write.csv(SubfamilyDF,"FigS4A.csv")
-
-
-#Pie chart version
-par(mar = c(0, 1, 2, 1))
-tmp1 = which(SubfamilyDF[,1] == 0)
-SubfamilyDF2 = SubfamilyDF[-tmp1,]
-mycols2 = mycols[-tmp1]
-pct = SubfamilyDF2[,1]/sum(SubfamilyDF2[,1])
-pie(SubfamilyDF2[,1],labels =  paste(rownames(SubfamilyDF2)," (",round(pct*100,1),"%)",sep=""),col=mycols2,main="ALS-TD Transposable Element Feature Breakdown",cex=0.5)
-
-tmp1 = which(SubfamilyDF[,2] == 0)
-SubfamilyDF2 = SubfamilyDF[-tmp1,]
-mycols2 = mycols[-tmp1]
-pct = SubfamilyDF2[,2]/sum(SubfamilyDF2[,2])
-pie(SubfamilyDF2[,2],labels =  paste(rownames(SubfamilyDF2)," (",round(pct*100,1),"%)",sep=""),col=mycols2,main="ALS-Ox Transposable Element Feature Breakdown",cex=0.5)
-
-tmp1 = which(SubfamilyDF[,3] == 0)
-SubfamilyDF2 = SubfamilyDF[-tmp1,]
-mycols2 = mycols[-tmp1]
-pct = SubfamilyDF2[,3]/sum(SubfamilyDF2[,3])
-pie(SubfamilyDF2[,3],labels =  paste(rownames(SubfamilyDF2)," (",round(pct*100,1),"%)",sep=""),col=mycols2,main="ALS-Glia Transposable Element Feature Breakdown",cex=1)
-
-
-###################### Chromosome TE Pie Chart #####################################################################
-
-a = table(substr(MyTEs,1,5))
-for(i in 1:length(a)){
-  if(substr(names(a)[i],5,5) == "|"){
-    names(a)[i] = substr(names(a)[i],1,4)
-  }
-}
-plot(a)
-
-chroms = data.frame(matrix(NA,nrow=length(a),ncol = 2))
-colnames(chroms) = c("chr","TEfeatures")
-chroms$chr = paste("chr",seq(1,23),sep="")
-chroms$chr[23] = "chrX"
-
-for(i in 1:nrow(chroms)){
-  for(j in 1:length(a)){
-    if(chroms$chr[i] == names(a)[j]){
-      chroms$TEfeatures[i] = a[[j]]
-    }
-    
-  }
-}
-
-library(RColorBrewer)
-mycols = colorRampPalette(c("cyan","dodgerblue4"))
-#mycols = colorRampPalette(c("white","gray30"))
-mycols = mycols(23)
-chroms$pct = chroms$TEfeatures / sum(chroms$TEfeatures)
-chroms$pct = chroms$pct * 100 
-chroms$chr = factor(chroms$chr,levels = c("chr1","chr2","chr3","chr4","chr5","chr6","chr7","chr8","chr9","chr10","chr11","chr12","chr13","chr14","chr15","chr16","chr17","chr18","chr19","chr20","chr21","chr22","chrX"))
-pie(chroms$TEfeatures,labels = paste(chroms$chr," (",round(chroms$pct,1),"%)",sep=""),col = mycols,main="chromosome vs number of discriminatory TE features")
+# MyTEs = rownames(NormCounts)[which(nchar(rownames(NormCounts)) >20)]
+# SubtypeTE.glia = SubtypeTE.ox = SubtypeTE.te = SubtypeTE.ond = SubtypeTE.hc = rep(NA,length(MyTEs))
+# count1 = count2 = count3 = count4 = count5 = 1
+# for(i in 1:length(MyTEs)){
+#   
+#   ind = which(rownames(NormCounts) == MyTEs[i])
+#   GliaAvg = mean(NormCounts[ind,GliaI])
+#   OxAvg = mean(NormCounts[ind,OxI])
+#   TEAvg = mean(NormCounts[ind,TEI])
+#   ONDAvg = mean(NormCounts[ind,ONDI])
+#   HCAvg = mean(NormCounts[ind,HCI])
+#   
+#   pick = max(c(GliaAvg,OxAvg,TEAvg,ONDAvg,HCAvg))
+#   
+#   if(GliaAvg == pick){
+#     SubtypeTE.glia[count1] = strsplit(MyTEs[i],"\\|")[[1]][4]
+#     count1 = count1+1
+#   }else if(OxAvg == pick){
+#     SubtypeTE.ox[count2] = strsplit(MyTEs[i],"\\|")[[1]][4]
+#     count2 = count2+1
+#   }else if(TEAvg == pick){
+#     SubtypeTE.te[count3] = strsplit(MyTEs[i],"\\|")[[1]][4]
+#     count3 = count3+1
+#   }else if(ONDAvg == pick){
+#     SubtypeTE.ond[count4] = strsplit(MyTEs[i],"\\|")[[1]][4]
+#     count4 = count4+1
+#   }else{
+#     SubtypeTE.hc[count5] = strsplit(MyTEs[i],"\\|")[[1]][4]
+#     count5 = count5+1
+#   }
+#   
+# }
+# 
+# SubtypeTE.glia = SubtypeTE.glia[! is.na(SubtypeTE.glia)]
+# SubtypeTE.ox = SubtypeTE.ox[! is.na(SubtypeTE.ox)]
+# SubtypeTE.te = SubtypeTE.te[! is.na(SubtypeTE.te)]
+# SubtypeTE.ond = SubtypeTE.ond[! is.na(SubtypeTE.ond)]
+# SubtypeTE.hc = SubtypeTE.hc[! is.na(SubtypeTE.hc)]
+# 
+# Subfamily = names(table(c(names(table(SubtypeTE.glia)),names(table(SubtypeTE.ox)),names(table(SubtypeTE.te)),names(table(SubtypeTE.ond)),names(table(SubtypeTE.hc)))))
+# SubfamilyDF = matrix(NA,nrow=length(Subfamily),ncol=5)
+# rownames(SubfamilyDF) = Subfamily
+# colnames(SubfamilyDF) = c("ALS-TD","ALS-Ox","ALS-Glia","FTLD",'HC')
+# 
+# for(i in 1:nrow(SubfamilyDF)){
+#   
+#   TEcount = length(which(SubtypeTE.te == rownames(SubfamilyDF)[i]))
+#   Oxcount = length(which(SubtypeTE.ox == rownames(SubfamilyDF)[i]))
+#   Gliacount = length(which(SubtypeTE.glia == rownames(SubfamilyDF)[i]))
+#   ONDcount = length(which(SubtypeTE.ond == rownames(SubfamilyDF)[i]))
+#   HCcount = length(which(SubtypeTE.hc == rownames(SubfamilyDF)[i]))
+#   
+#   SubfamilyDF[i,1] = TEcount
+#   SubfamilyDF[i,2] = Oxcount
+#   SubfamilyDF[i,3] = Gliacount
+#   SubfamilyDF[i,4] = ONDcount
+#   SubfamilyDF[i,5] = HCcount
+#   
+# }
+# 
+# #Quick Plot
+# par(mar = c(6.1, 5.1, 4.1, 2.1)) 
+# mycols = rainbow(nrow(SubfamilyDF))
+# barplot(SubfamilyDF,ylim = c(0,300),ylab = "Number of Discriminatory TEs",xlab="Subtype",col = mycols,cex.axis = 1.2,cex.names = 1.5,cex.lab=1.5)
+# #legend(5.5,300,legend = rownames(SubfamilyDF),col = mycols,lty = 1,lwd=3,cex = 0.2)
+# 
+# #Legend without plot
+# plot(NULL ,xaxt='n',yaxt='n',bty='n',ylab='',xlab='', xlim=0:1, ylim=0:1)
+# legend("topleft",legend = rownames(SubfamilyDF),col = mycols,lty = 1,lwd=3,cex = 0.8,ncol=4)
+# 
+# #Source
+# # setwd("D:/Jarrett/Research/Nat Comm Reviews/Source")
+# # write.csv(SubfamilyDF,"FigS4A.csv")
+# 
+# 
+# #Pie chart version
+# par(mar = c(0, 1, 2, 1))
+# tmp1 = which(SubfamilyDF[,1] == 0)
+# SubfamilyDF2 = SubfamilyDF[-tmp1,]
+# mycols2 = mycols[-tmp1]
+# pct = SubfamilyDF2[,1]/sum(SubfamilyDF2[,1])
+# pie(SubfamilyDF2[,1],labels =  paste(rownames(SubfamilyDF2)," (",round(pct*100,1),"%)",sep=""),col=mycols2,main="ALS-TD Transposable Element Feature Breakdown",cex=0.5)
+# 
+# tmp1 = which(SubfamilyDF[,2] == 0)
+# SubfamilyDF2 = SubfamilyDF[-tmp1,]
+# mycols2 = mycols[-tmp1]
+# pct = SubfamilyDF2[,2]/sum(SubfamilyDF2[,2])
+# pie(SubfamilyDF2[,2],labels =  paste(rownames(SubfamilyDF2)," (",round(pct*100,1),"%)",sep=""),col=mycols2,main="ALS-Ox Transposable Element Feature Breakdown",cex=0.5)
+# 
+# tmp1 = which(SubfamilyDF[,3] == 0)
+# SubfamilyDF2 = SubfamilyDF[-tmp1,]
+# mycols2 = mycols[-tmp1]
+# pct = SubfamilyDF2[,3]/sum(SubfamilyDF2[,3])
+# pie(SubfamilyDF2[,3],labels =  paste(rownames(SubfamilyDF2)," (",round(pct*100,1),"%)",sep=""),col=mycols2,main="ALS-Glia Transposable Element Feature Breakdown",cex=1)
+# 
+# 
+# ###################### Chromosome TE Pie Chart #####################################################################
+# 
+# a = table(substr(MyTEs,1,5))
+# for(i in 1:length(a)){
+#   if(substr(names(a)[i],5,5) == "|"){
+#     names(a)[i] = substr(names(a)[i],1,4)
+#   }
+# }
+# plot(a)
+# 
+# chroms = data.frame(matrix(NA,nrow=length(a),ncol = 2))
+# colnames(chroms) = c("chr","TEfeatures")
+# chroms$chr = paste("chr",seq(1,23),sep="")
+# chroms$chr[23] = "chrX"
+# 
+# for(i in 1:nrow(chroms)){
+#   for(j in 1:length(a)){
+#     if(chroms$chr[i] == names(a)[j]){
+#       chroms$TEfeatures[i] = a[[j]]
+#     }
+#     
+#   }
+# }
+# 
+# library(RColorBrewer)
+# mycols = colorRampPalette(c("cyan","dodgerblue4"))
+# #mycols = colorRampPalette(c("white","gray30"))
+# mycols = mycols(23)
+# chroms$pct = chroms$TEfeatures / sum(chroms$TEfeatures)
+# chroms$pct = chroms$pct * 100 
+# chroms$chr = factor(chroms$chr,levels = c("chr1","chr2","chr3","chr4","chr5","chr6","chr7","chr8","chr9","chr10","chr11","chr12","chr13","chr14","chr15","chr16","chr17","chr18","chr19","chr20","chr21","chr22","chrX"))
+# pie(chroms$TEfeatures,labels = paste(chroms$chr," (",round(chroms$pct,1),"%)",sep=""),col = mycols,main="chromosome vs number of discriminatory TE features")

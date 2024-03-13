@@ -55,11 +55,11 @@ colnames(GSE15_RawCounts) = substr(colnames(GSE15_RawCounts),1,14)
 ########################################################################################################################################
 
 
-TECounts = read.csv("HiSeq_SpinalCord_ALSCohort_TECounts_HGND_6-3-23.csv")
+TECounts = read.csv("HiSeq_SpinalCord_ALSCohort_TECounts_HGND_6-3-23.csv") #Provided in Supplemental Dataset 1
 rownames(TECounts) = TECounts[,1]
 TECounts = TECounts[,-1]
 
-ctrTECounts = read.csv("HiSeq_SpinalCord_ControlCohort_TECounts_HGND_8-15-23.csv")
+ctrTECounts = read.csv("HiSeq_SpinalCord_ControlCohort_TECounts_HGND_8-15-23.csv") #Provided in Supplemental Dataset 1
 rownames(ctrTECounts) = ctrTECounts[,1]
 ctrTECounts = ctrTECounts[,-1]
 

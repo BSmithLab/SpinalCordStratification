@@ -131,6 +131,7 @@ Ctop5000ALL = names(table(c(NtopALL,HtopALL)))
 setwd("G:/SpinalCord/Publication/RawExpression/WithControls/NovaSeq_4Covar")
 
 mad10000.ens = read.csv("NovaSeq_SpinalCord_withControls_MedianofRatios_ENSG_NoFiltering_9-27-23.csv",header = T) #File generated in previous script
+#File also found at: https://figshare.com/authors/Jarrett_Eshima/13813720
 rownames(mad10000.ens) = mad10000.ens[,1]
 mad10000.ens = mad10000.ens[,-1]
 egenes = rownames(mad10000.ens)
@@ -140,22 +141,6 @@ species="human"
 ensembl = biomaRt::useMart(biomart = "ENSEMBL_MART_ENSEMBL", dataset = "hsapiens_gene_ensembl", host=ensembl_version)
 gene_positions_nova <- biomaRt::getBM(filters = 'ensembl_gene_id',attributes=c('ensembl_gene_id','hgnc_symbol'), values = newEG, mart = ensembl)
 
-# setwd("G:/SpinalCord/Publication/RawExpression/WithControls/HiSeq_4Covar")
-# 
-# mad10000.ens = read.csv("HiSeq_SpinalCord_withControls_MedianofRatios_ENSG_NoFiltering_9-27-23.csv",header=T) #File generated in previous script
-# rownames(mad10000.ens) = mad10000.ens[,1] 
-# mad10000.ens = mad10000.ens[,-1]
-# egenes = rownames(mad10000.ens)
-# newEG = sub("\\..*","",egenes) #Keep text to the left of the dot
-# ensembl_version = "https://apr2020.archive.ensembl.org" #Updated: https://jan2020.archive.ensembl.org
-# species="human"
-# ensembl = biomaRt::useMart(biomart = "ENSEMBL_MART_ENSEMBL", dataset = "hsapiens_gene_ensembl", host=ensembl_version)
-# gene_positions_hi <- biomaRt::getBM(filters = 'ensembl_gene_id',attributes=c('ensembl_gene_id','hgnc_symbol'), values = newEG, mart = ensembl)
-# 
-# ke = which(! gene_positions_nova$ensembl_gene_id %in% gene_positions_hi$ensembl_gene_id) #Only finds the genes found in the HiSeq Gene Symbol LUT but not the NovaSeq Gene Symbol LUT
-# ke2 = gene_positions_nova[ke,]
-# Combined_gene_positions = rbind(gene_positions_hi,ke2)
-
 Combined_gene_positions = gene_positions_nova
 
 #####################################################################################################################################################################################
@@ -164,6 +149,7 @@ Combined_gene_positions = gene_positions_nova
 ##NovaSeq
 setwd("G:/SpinalCord/Publication/RawExpression/WithControls/NovaSeq_4Covar")
 filen = "NovaSeq_SpinalCord_withControls_MedianofRatios_ENSG_NoFiltering_9-27-23.csv" #File generated in previous script
+#File also found at: https://figshare.com/authors/Jarrett_Eshima/13813720
 vstcounts = read.csv(filen)
 rownames(vstcounts) = vstcounts[,1]
 vstcounts = vstcounts[,-1]
@@ -219,6 +205,7 @@ FullNovaSymbol = finalvstsymbol
 setwd("G:/SpinalCord/Publication/RawExpression/WithControls/HiSeq_4Covar")
 filen = "HiSeq_SpinalCord_withControls_MedianofRatios_ENSG_NoFiltering_9-27-23.csv"
 vstcounts = read.csv(filen) #File generated in previous script
+#File also found at: https://figshare.com/authors/Jarrett_Eshima/13813720
 rownames(vstcounts) = vstcounts[,1]
 vstcounts = vstcounts[,-1]
 
@@ -271,7 +258,7 @@ FullHiSymbol = finalvstsymbol
 
 wd = 'G:/SpinalCord/Publication/Enrichment/FullCohort/4Covar/MoR'
 setwd(wd)
-save.image("SAKEfeatures4Enrichment_SpinalCord_withControls_NoFiltering_4Covar_9-30-23.RData")
+#save.image("SAKEfeatures4Enrichment_SpinalCord_withControls_NoFiltering_4Covar_9-30-23.RData")
 #load("G:/SpinalCord/Publication/Enrichment/FullCohort/SAKEfeatures4Enrichment_SpinalCord_withControls_NoOligo_8-15-23.RData")
 
 # which(rownames(FullNovaSymbol) == "SLC17A6")

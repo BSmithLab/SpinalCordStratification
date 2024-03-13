@@ -2,7 +2,7 @@
 wd = "G:/SpinalCord/Publication/Enrichr"
 setwd(wd)
 
-
+#Result files downloaded from Enrichr as a CSV table
 Glia_Up = read.table("GliaUpreg_Reactome_2022_table.txt",header = T,sep = "\t")
 Glia_Down = read.table("GliaDownreg_Reactome_2022_table.txt",header = T,sep = "\t")
 Ox_Up = read.table("OxUpreg_Reactome_2022_table.txt",header = T,sep = "\t")

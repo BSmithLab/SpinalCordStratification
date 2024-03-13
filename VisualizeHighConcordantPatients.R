@@ -1,10 +1,10 @@
 #High Concordance Heatmap
 setwd("G:/SpinalCord/Publication/Manuscript/Tables/Concordance")
-TD_Pheno_Final = read.csv("ALS-TD_HighlyConcordantCNS_4Covar_9-21-23_MatchingCNS.csv")
+TD_Pheno_Final = read.csv("ALS-TD_HighlyConcordantCNS_4Covar_9-21-23_MatchingCNS.csv") #Supplemental Dataset 4, rows 24-46
 TD_Pheno_Final = TD_Pheno_Final[-which(TD_Pheno_Final$SubjectID == ""),]
-Ox_Pheno_Final = read.csv("ALS-Ox_HighlyConcordantCNS_4Covar_9-21-23_MatchingCNS.csv")
+Ox_Pheno_Final = read.csv("ALS-Ox_HighlyConcordantCNS_4Covar_9-21-23_MatchingCNS.csv") #Supplemental Dataset 4, rows 10-23
 Ox_Pheno_Final = Ox_Pheno_Final[-which(Ox_Pheno_Final$SubjectID == ""),]
-Glia_Pheno_Final = read.csv("ALS-Glia_HighlyConcordantCNS_4Covar_9-21-23_MatchingCNS.csv")
+Glia_Pheno_Final = read.csv("ALS-Glia_HighlyConcordantCNS_4Covar_9-21-23_MatchingCNS.csv") #Supplemental Dataset 4, rows 2-9
 Glia_Pheno_Final = Glia_Pheno_Final[-which(Glia_Pheno_Final$SubjectID == ""),]
 
 ### ALS-Glia

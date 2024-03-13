@@ -3,7 +3,7 @@
 wd = "E:/HiSeqTE/Control"
 setwd(wd)
 
-FileList = list.files(path = wd, pattern = "_TEcounts.txt")
+FileList = list.files(path = wd, pattern = "_TEcounts.txt") #Files obtained from SQuIRE output
 
 chunknumber = 1
 start=1

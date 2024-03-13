@@ -6,7 +6,7 @@ setwd(wd)
 ##############################################################################################################################################################################################################
 #PATIENT IDs
 
-SC_Nova = read.csv("SpinalCord_NovaSeq_RobustSubtypeAssignment_4Covariate_9-18-23_majority.csv")
+SC_Nova = read.csv("SpinalCord_NovaSeq_RobustSubtypeAssignment_4Covariate_9-18-23_majority.csv") #file derived from previous script
 
 #colnames(SC_Nova) = str_sub(colnames(SC_Nova),6,nchar(colnames(SC_Nova))) 
 rownames(SC_Nova) = SC_Nova[,1]; SC_Nova = SC_Nova[,-1]
@@ -20,7 +20,7 @@ SC_Nova = SC_Nova[,-49]
 tmp = t(SC_Nova)
 pie(table(tmp[,12]),col=c("goldenrod1","navy","firebrick"),main="NovaSeq Spinal Cord Labels")
 
-SC_Hi = read.csv("SpinalCord_HiSeq_RobustSubtypeAssignment_4Covariate_9-18-23_majority.csv")
+SC_Hi = read.csv("SpinalCord_HiSeq_RobustSubtypeAssignment_4Covariate_9-18-23_majority.csv") #file derived from previous script
 
 #colnames(SC_Hi) = str_sub(colnames(SC_Hi),6,nchar(colnames(SC_Hi)))
 rownames(SC_Hi) = SC_Hi[,1]; SC_Hi = SC_Hi[,-1]
@@ -33,8 +33,8 @@ pie(table(tmp2[,12]),col=c("goldenrod1","navy","firebrick"),main="HiSeq Spinal C
 pie(table(c(tmp[,12],tmp2[,12])),col=c("goldenrod1","navy","firebrick"),main="Combined Platform Spinal Cord Labels")
 
 
-Cortex = read.csv("Table_S10.csv")
-Pheno = read.csv("CLINICAL_DATA_PRUDENCIO.csv")
+Cortex = read.csv("Table_S10.csv") #Available at: https://www.nature.com/articles/s41467-022-35494-w#Sec33
+Pheno = read.csv("CLINICAL_DATA_PRUDENCIO.csv") #By request from NYGC
 
 Pheno$ExternalSampleId = gsub("-",".",Pheno$ExternalSampleId)
 
@@ -751,5 +751,10 @@ sum(!is.na(c(Concordance$CervicalSubtype,Concordance$ThoracicSubtype,Concordance
 
 write.csv(Concordance,"ALS_Cortex_SpinalCord_4Covar_SubtypeConcordance_9-18-23.csv")
 
-#Proceed to ConcordanceMeta.R
+FinalHiSeq = Concordance[Concordance$Patient %in% CleanHiSeq$ExternalSubjectId,]
+write.csv(FinalHiSeq,"SpinalCord_Concordance_HiSeq_9-18-23.csv")
+FinalNovaSeq = Concordance[Concordance$Patient %in% CleanNovaSeq$ExternalSubjectId,]
+write.csv(FinalNovaSeq,"SpinalCord_Concordance_NovaSeq_9-18-23.csv")
+
+#Proceed to ConcordanceMeta_TISSUE_and_PLATFORM_LEVEL.R
 

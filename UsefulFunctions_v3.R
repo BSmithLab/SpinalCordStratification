@@ -337,6 +337,14 @@ MatrixtoHeatmap3 = function(data,samplesarecols,featuresasrows,limits,colors,cus
 # MatrixtoHeatmap3(test,samplesarecols = T,featuresasrows = T,clustercols = T)
 
 ###################################################################################################
+############################    Multi-color Ramp    ###############################################
+###################################################################################################
+
+pal = colorRampPalette(c("#cf7670","#cfa270","#cfc270","#bccf70","#9fd171","#77d16f","#6fd191","#70d4b7","#6ecbd4","#6ea8d4","#6c7dd4","#786cd4","#996ad4","#be68d4","#d166b6","#cc628b"))
+pal(1000)
+barplot(rep(1,100),col = pal(100))
+barplot(rep(1,500),col = pal(500))
+###################################################################################################
 ###    Extract gene/transcript names from DESeq2 differential expression result object    #########
 ###################################################################################################
 #Short function to quickly obtain most significant gene/transcript names from DESeq2 differential expression

@@ -7,7 +7,7 @@
 #MuSiC Estimates for ~400 samples are provided in Supplemental Table 4
 
 setwd("G:/SpinalCord/Publication/CellDecon")
-CellProps = read.csv("MuSiC_Estimates.csv")
+CellProps = read.csv("MuSiC_Estimates.csv") #Available from: https://www.nature.com/articles/s41593-022-01205-3#Sec27 (Supplemental Table 3)
 colnames(CellProps) = CellProps[1,]
 CellProps = CellProps[-1,]
 CellProps = CellProps[,1:9]

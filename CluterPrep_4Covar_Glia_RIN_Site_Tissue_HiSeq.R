@@ -55,7 +55,7 @@ colnames(GSE15_RawCounts) = substr(colnames(GSE15_RawCounts),1,14)
 ########################################################################################################################################
 
 
-TECounts = read.csv("HiSeq_SpinalCord_ALSCohort_TECounts_HGND_6-3-23.csv")
+TECounts = read.csv("HiSeq_SpinalCord_ALSCohort_TECounts_HGND_6-3-23.csv") #Provided in Supplemental Dataset 1
 rownames(TECounts) = TECounts[,1]
 TECounts = TECounts[,-1]
 
@@ -463,8 +463,8 @@ write.csv(MAD5k_SAKE,file)
 
 
 
-save.image("HiSeq_MAD10k_Ready4Clustering_ALS_4Covariates_9-15-23.RData")
-#load("G:/SpinalCord/Publication/RawExpression/HiSeq_NoGlia_NoRIN05/HiSeq_MAD10k_Ready4Clustering_ALS_NoGliaMarkers1k_NoRIN05_8-20-23.RData")
+#save.image("HiSeq_MAD10k_Ready4Clustering_ALS_4Covariates_9-15-23.RData")
+load("G:/SpinalCord/Publication/RawExpression/4Covar_HiSeq/HiSeq_MAD10k_Ready4Clustering_ALS_4Covariates_9-15-23.RData")
 
 
 # library(DESeq2)
@@ -473,3 +473,7 @@ save.image("HiSeq_MAD10k_Ready4Clustering_ALS_4Covariates_9-15-23.RData")
 # DESeq_NormalizedCounts_60k = DESeq_NormalizedCounts_60k[! (rownames(DESeq_NormalizedCounts_60k) %in% rownames(sig)),]
 # NormCounts = DESeq_NormalizedCounts_60k
 # write.csv(NormCounts,"HiSeq_SpinalCord_withControls_MedianofRatios_ENSG.csv")
+
+library("vsn")
+meanSdPlot(vstcounts)
+plotDispEsts(dseq)
