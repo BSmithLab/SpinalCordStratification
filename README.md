@@ -17,7 +17,7 @@ Main Code and Order
 11) ConcordanceMeta_TISSUE_and_PLATFORM_LEVEL.R (files obtained from previous step)
 12) Bootstrap_Concordance_pval.R ; Bootstrap_Concordance_pval_HiSeq.R ; Bootstrap_Concordance_pval_NovaSeq.R
 13) SpinalCordStratification_survival_clinicalparameters.R
-14) CoxRegression_IIDSurvival.R
+14) SpinalCord_IIDSurvival_TissueLevel.R (Cox Regression)
 15) SpinalCordStratification_UnivariateAnalysis_Final.R
 16) SpinalCord_SubtypeBiomarkers_GroupedViolin_CNSLevelExpression.R
 17) PLSDA_SpinalCord.R
