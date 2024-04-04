@@ -10,18 +10,18 @@ Main Code and Order
 6) SAKE.R
 7) PostSAKE_SpinalCord.R
 8) TopFeatures_vectorized_MoR.R
-9A) GSEA 
-9B) EnrichrPrep.R
-9C) Enrichr_HGEA_pval_heatmap.R
-10) CortexSpinal_Concordance_Clean.R
-11) ConcordanceMeta_TISSUE_and_PLATFORM_LEVEL.R (files obtained from previous step)
-12) Bootstrap_Concordance_pval.R ; Bootstrap_Concordance_pval_HiSeq.R ; Bootstrap_Concordance_pval_NovaSeq.R
-13) SpinalCordStratification_survival_clinicalparameters.R
-14) SpinalCord_IIDSurvival_TissueLevel.R (Cox Regression)
-15) SpinalCordStratification_UnivariateAnalysis_Final.R
-16) SpinalCord_SubtypeBiomarkers_GroupedViolin_CNSLevelExpression.R
-17) PLSDA_SpinalCord.R
-18) Python scikit learn scripts for classification
+9) GSEA 
+10) EnrichrPrep.R
+11) Enrichr_HGEA_pval_heatmap.R
+12) CortexSpinal_Concordance_Clean.R
+13) ConcordanceMeta_TISSUE_and_PLATFORM_LEVEL.R (files obtained from previous step)
+14) Bootstrap_Concordance_pval.R ; Bootstrap_Concordance_pval_HiSeq.R ; Bootstrap_Concordance_pval_NovaSeq.R
+15) SpinalCordStratification_survival_clinicalparameters.R
+16) SpinalCord_IIDSurvival_TissueLevel.R (Cox Regression)
+17) SpinalCordStratification_UnivariateAnalysis_Final.R
+18) SpinalCord_SubtypeBiomarkers_GroupedViolin_CNSLevelExpression.R
+19) PLSDA_SpinalCord.R
+20) Python scikit learn scripts for classification
 
 Supplemental Scripts:
 
